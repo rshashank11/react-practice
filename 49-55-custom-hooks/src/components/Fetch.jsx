@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useFetch } from "../CustomHooks/useFetch"
 
 const URLS = {
@@ -18,7 +18,7 @@ const OPTIONS = {
 function Fetch() {
   const [url, setUrl] = useState(URLS.USERS)
 
-  const { data, isError, isLoading } = useFetch(url)
+  const { data, isLoading, isError } = useFetch(url)
 
   return (
     <>

@@ -1,15 +1,45 @@
-import { useEffect, useState } from "react"
+import { useReducer } from "react"
+import { useEffect } from "react"
+
+const ACTIONS = {
+  START: "Start",
+  SUCCESS: "Success",
+  ERROR: "Error",
+}
+
+function reducer(state, { type, payload }) {
+  switch (type) {
+    case ACTIONS.SUCCESS:
+      return {
+        data: payload.data,
+        isLoading: false,
+        isError: false,
+      }
+
+    case ACTIONS.START:
+      return {
+        isLoading: true,
+        isError: false,
+      }
+    case ACTIONS.ERROR:
+      return {
+        isLoading: false,
+        isError: true,
+      }
+    default:
+      return state
+  }
+}
 
 export function useFetch(url, options) {
-  const [data, setData] = useState(undefined)
-  const [isLoading, setIsLoading] = useState(true)
-  const [isError, setIsError] = useState(false)
+  const [state, dispatch] = useReducer(reducer, {
+    isLoading: false,
+    isError: false,
+    data: [],
+  })
 
   useEffect(() => {
-    setIsLoading(true)
-    setIsError(false)
-    setData(undefined)
-
+    dispatch({ type: ACTIONS.START })
     const controller = new AbortController()
 
     fetch(url, { signal: controller.signal, ...options })
@@ -20,14 +50,10 @@ export function useFetch(url, options) {
           return res.json()
         }
       })
-      .then((data) => setData(data))
+      .then((data) => dispatch({ type: ACTIONS.SUCCESS, payload: { data } }))
       .catch((error) => {
         if (error.name === "AbortError") return
-        setIsError(true)
-      })
-      .finally(() => {
-        if (controller.signal.aborted) return
-        setIsLoading(false)
+        dispatch({ type: ACTIONS.ERROR, payload: { error } })
       })
 
     return () => {
@@ -35,5 +61,5 @@ export function useFetch(url, options) {
     }
   }, [url])
 
-  return { data, isError, isLoading }
+  return state
 }

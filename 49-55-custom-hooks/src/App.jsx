@@ -5,9 +5,9 @@ import LocalStorage from "./components/LocalStorage"
 function App() {
   return (
     <>
-      {/* <Fetch /> */}
+      <Fetch />
       {/* <Array /> */}
-      <LocalStorage />
+      {/* <LocalStorage /> */}
     </>
   )
 }
