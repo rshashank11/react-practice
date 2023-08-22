@@ -1,12 +1,7 @@
-import React from "react";
-import Hooks from "./Hooks";
+import React from "react"
 
 function App() {
-  return (
-    <>
-      <Hooks />
-    </>
-  );
+  return <>{import.meta.env.VITE_URL}</>
 }
 
-export default App;
+export default App
