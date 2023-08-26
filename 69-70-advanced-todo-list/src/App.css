@@ -1,19 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  box-sizing: border-box;
+  --bg-color: #5c5c5e;
+  --list-color: #f8f8f9;
+  --list-item-hover-completed: #a9b0bb;
+  --text-color: #3c372e;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: "Poppins", sans-serif;
+}
+
+.App {
+  border-radius: 20px;
+  font-size: 12px;
+  max-width: 500px;
+  background-color: var(--list-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  color: var(--text-color);
+}
+
+h2 {
+  padding: 0;
+  margin: 10px 0 5px 0;
+}
+
+input {
+  font-family: inherit;
+}
+
+#list {
+  padding-inline-start: 0px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid black;
+}
+
 #new-todo-form {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
+  min-width: 400px;
+  max-width: 400px;
+  border-bottom: 1px solid black;
+}
+
+#new-todo-form > button {
+  margin-bottom: 20px;
 }
 
 #new-todo-form > * {
   margin: 0.15rem;
 }
 
-#list {
-  padding: 0;
+.list-item {
+  display: flex;
+  align-items: center;
+  list-style: none;
 }
 
-.list-item {
-  list-style: none;
+.list-item-label {
+  display: flex;
+  align-items: center;
 }
 
 .list-item-label:hover,
@@ -36,7 +88,14 @@
 }
 
 button {
+  font-family: inherit;
+  padding: 5px 10px;
   cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  color: var(--list-color);
+  background-color: var(--bg-color);
 }
 
 [data-button-edit] {
@@ -47,11 +106,27 @@ button {
   display: flex;
   gap: 1rem;
   align-items: center;
-  border-bottom: 1px solid black;
-  padding-bottom: 0.5rem;
+  padding-bottom: 20px;
 }
 
 .filter-form-group {
   display: flex;
   gap: 0.25rem;
+}
+
+textarea {
+  font-size: 12px;
+  background-color: inherit;
+  font-family: inherit;
+  text-align: center;
+  margin: 10px 20px;
+  min-width: 250px;
+  border: none;
+  resize: none;
+  padding: 0;
+  overflow: hidden;
+  white-space: normal;
+}
+textarea:focus {
+  outline: none;
 }
