@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react"
+import React, { useReducer, useState } from "react"
 
 const ACTIONS = {
   ADD: "ADD",
@@ -26,17 +26,31 @@ function reducer(todos, { type, payload }) {
     case ACTIONS.DELETE:
       return todos.filter((todo) => todo.id !== payload.todoId)
 
+    case ACTIONS.UPDATE:
+      return todos.map((todo) => {
+        if (todo.id === payload.todoId) {
+          return { ...todo, name: payload.name, completed: payload.completed }
+        }
+        return todo
+      })
     default:
       throw new Error(`No action found for ${type}`)
   }
 }
 
 export function TodoProvider({ children }) {
+  const [filterName, setFilterName] = useState("")
+  const [hideCompleted, setHideCompleted] = useState(false)
   const [todos, dispatch] = useReducer(reducer, [], (initialValue) => {
     const value = localStorage.getItem("TODOS")
     if (value == null) return initialValue
 
     return JSON.parse(value)
+  })
+
+  const filteredTodos = todos.filter((todo) => {
+    if (hideCompleted && todo.completed) return
+    return todo.name.toLowerCase().includes(filterName)
   })
 
   function addNewTodo(name) {
@@ -50,12 +64,27 @@ export function TodoProvider({ children }) {
     })
   }
 
+  function updateTodo(todoId, name, completed) {
+    dispatch({ type: ACTIONS.UPDATE, payload: { todoId, name, completed } })
+  }
+
   function deleteTodo(todoId) {
     dispatch({ type: ACTIONS.DELETE, payload: { todoId } })
   }
   return (
     <TodoContext.Provider
-      value={{ todos, dispatch, addNewTodo, toggleTodo, deleteTodo }}
+      value={{
+        todos: filteredTodos,
+        hideCompleted,
+        setHideCompleted,
+        filterName,
+        setFilterName,
+        dispatch,
+        addNewTodo,
+        toggleTodo,
+        deleteTodo,
+        updateTodo,
+      }}
     >
       {children}
     </TodoContext.Provider>

@@ -14,7 +14,9 @@ export function NewTodoForm() {
   }
   return (
     <form onSubmit={handleSubmit} id="new-todo-form">
-      <label htmlFor="todo-input">New Todo</label>
+      <label htmlFor="todo-input">
+        <h2>New Todo</h2>
+      </label>
       <input type="text" id="todo-input" ref={nameRef} />
       <button type="submit">Add Todo</button>
     </form>

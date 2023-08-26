@@ -4,7 +4,7 @@ import { TodoItem } from "./TodoItem"
 import { TodoContext } from "../hooks/TodoContext"
 
 function TodoList() {
-  const { todos, toggleTodo, deleteTodo } = useContext(TodoContext)
+  const { todos } = useContext(TodoContext)
   useEffect(() => {
     localStorage.setItem("TODOS", JSON.stringify(todos))
   }, [todos])
