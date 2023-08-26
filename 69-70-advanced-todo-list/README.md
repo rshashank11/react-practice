@@ -1,8 +1,6 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Advanced Todo List
+## Features:
+1. Todos are stored in local storage.
+2. Converted all the state in the application to use useReducer and Context to pass the state between components.
+3. Added the ability to delete existing todos.
+4. A form that lets you filter todos by their name and hide completed todos.
