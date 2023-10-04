@@ -1,7 +1,12 @@
 import React from "react"
+import { Portal } from "./Portal"
 
 function App() {
-  return <>{import.meta.env.VITE_URL}</>
+  return (
+    <>
+      <Portal />
+    </>
+  )
 }
 
 export default App
