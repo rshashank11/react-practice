@@ -1,11 +1,11 @@
-const { cakeActions } = require("../cake/cakeSlice")
+import { ordered as cakeOrdered } from "../cake/cakeSlice"
 
-const createSlice = require("@reduxjs/toolkit").createSlice
+import { createSlice } from "/node_modules/.vite/deps/@reduxjs_toolkit.js?v=629edc25"
 
 const iceCreamSlice = createSlice({
   name: "ice cream",
   initialState: {
-    numOfIceCreams: 10,
+    numOfIceCreams: 20,
   },
   reducers: {
     ordered: (state, action) => {
@@ -16,11 +16,11 @@ const iceCreamSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(cakeActions.ordered, (state) => {
+    builder.addCase(cakeOrdered, (state) => {
       state.numOfIceCreams--
     })
   },
 })
 
-module.exports = iceCreamSlice.reducer
-module.exports.iceCreamActions = iceCreamSlice.actions
+export const { ordered, restocked } = iceCreamSlice.actions
+export default iceCreamSlice.reducer
