@@ -1,10 +1,11 @@
 import React from "react"
-import { Portal } from "./Portal"
+
+import CaptureEventListeners from "./CaptureEventListeners"
 
 function App() {
   return (
     <>
-      <Portal />
+      <CaptureEventListeners />
     </>
   )
 }
